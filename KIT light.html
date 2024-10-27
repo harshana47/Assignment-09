@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KIT</title>
+    <style>
+        body{
+            background: black;
+        }
+        /*knight rider car light*/
+        .Kitt {
+            width: fit-content;
+            height: 100px;
+            border: 1px solid red;
+            margin: 300px auto;
+            background: transparent;
+
+        }
+
+        .btn_panel{
+            width: fit-content;
+            height: fit-content;
+            background: transparent;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        #light_panel{
+            display: flex;
+        }
+
+        .light{
+            width: 100px;
+            height: 50px;
+            background: white;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section class="Kitt">
+<section id="light_panel">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+</section>
+
+<section class="btn_panel">
+    <button id="start" class="start">start</button>
+    <button id="stop" class="stop">stop</button>
+</section>
+</section>
+
+<script src="lib/jquery-3.7.1.min.js"></script>
+<script>
+    const light_count = 6;
+    let current_light = -1;
+    let direction = "Right";
+    let intervalId = null;
+
+    updateLight = () => {
+        if (direction === "Right") {
+            current_light++;
+            $('.light').css("background", "white");
+            $(".light").eq(current_light).css("background" , "red");
+            $(".light").eq(current_light-1).css("background" , "pink")
+
+            if (current_light === light_count-1) {
+                direction = "Left";
+            }
+        }else {
+            current_light--;
+            $('.light').css("background", "white");
+            $(".light").eq(current_light).css("background" , "red");
+            $(".light").eq(current_light+1).css("background" , "pink")
+
+
+            if (current_light === 0) {
+                direction = "Right";
+            }
+        }
+    }
+
+    $('#start').on('click', function (){
+        intervalId = setInterval(updateLight, 100);
+    });
+
+    $('#stop').on('click', function (){
+        clearInterval(intervalId);
+    });
+
+</script>
+</body>
+</html>
